@@ -1,51 +1,40 @@
-<div class="container d-flex flex-column justify-content-center align-items-center h-100">
+<div class="container">
   <h1>Jogo de Adivinhação</h1>
 
-  <section class="mt-5">
+  <section class="dificuldade">
     <h2>Seleção de Dificuldade</h2>
-
-    <div class="row justify-content-center gap-2 mt-4">
-      <button (click)="selecionarDificuldade('Fácil')" class="col-3 btn btn-primary">Fácil</button>
-      <button (click)="selecionarDificuldade('Médio')" class="col-3 btn btn-primary">Médio</button>
-      <button (click)="selecionarDificuldade('Difícil')" class="col-3 btn btn-primary">
-        Difícil
-      </button>
+    <div class="botoes">
+      <button (click)="selecionarDificuldade('Fácil')" class="btn btn-facil">Fácil</button>
+      <button (click)="selecionarDificuldade('Médio')" class="btn btn-medio">Médio</button>
+      <button (click)="selecionarDificuldade('Difícil')" class="btn btn-dificil">Difícil</button>
     </div>
   </section>
 
-  <main class="row row-cols-3 g-3 align-items-center bg-danger-subtle rounded text-center p-5 mt-5">
-    <label class="display-1">{{ dicaNumeroMaiorQue }}></label>
+  <main *ngIf="dificuldadeSelecionada" class="jogo">
+    <label class="intervalo">{{ dicaNumeroMaiorQue }} &lt; ? &lt; {{ dicaNumeroMenorQue }}</label>
 
-    <div class="d-flex flex-column gap-2">
+    <div class="entrada">
       <input
-        [disabled]="!dificuldadeSelecionada || jogoEstaFinalizado"
+        [disabled]="jogoEstaFinalizado"
         [(ngModel)]="numeroDigitado"
-        class="display-1 text-center rounded"
         type="number"
         min="1"
-        max="100"
+        [max]="dicaNumeroMenorQue"
       />
-
-      <button
-        [disabled]="!dificuldadeSelecionada || jogoEstaFinalizado"
-        (click)="adivinhar()"
-        class="btn btn-primary"
-      >
-        Adivinhar
-      </button>
-      <button (click)="reiniciar()" class="btn btn-success">Reiniciar</button>
+      <button (click)="adivinhar()" [disabled]="jogoEstaFinalizado" class="btn btn-adivinhar">Adivinhar</button>
+      <button (click)="reiniciar()" class="btn btn-reiniciar">Reiniciar</button>
     </div>
 
-    <label class="display-1"><{{ dicaNumeroMenorQue }}</label>
+    <section class="status">
+      <span>Pontuação: {{ pontuacao }}</span>
+      <span>Tentativas Restantes: {{ tentativasRestantes }}</span>
+    </section>
   </main>
 
-  @if (dificuldadeSelecionada) {
-    <section class="d-flex justify-content-between gap-2 mt-2">
-      <label class="fs-5"><span class="fw-semibold">Pontuação:</span> {{ pontuacao }}</label>
-
-      <label class="fs-5"
-        ><span class="fw-semibold">Tentativas Restantes:</span> {{ tentativasRestantes }}</label
-      >
-    </section>
-  }
+  <section *ngIf="obterRanking().length > 0" class="ranking">
+    <h2>Ranking</h2>
+    <ol>
+      <li *ngFor="let r of obterRanking()">{{ r.dificuldade }} → {{ r.pontuacao }} pontos</li>
+    </ol>
+  </section>
 </div>

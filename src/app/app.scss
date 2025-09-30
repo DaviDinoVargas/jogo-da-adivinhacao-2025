@@ -1,0 +1,86 @@
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+  color: #fff;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+
+.botoes {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: #fff;
+  transition: transform 0.2s;
+}
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.btn-facil { background-color: #28a745; }
+.btn-medio { background-color: #ffc107; color: #000; }
+.btn-dificil { background-color: #dc3545; }
+
+.jogo {
+  margin-top: 2rem;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.intervalo { font-size: 2rem; margin-bottom: 1rem; }
+
+.entrada { display: flex; gap: 1rem; margin-bottom: 1rem; }
+
+input[type="number"] {
+  width: 5rem;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  text-align: center;
+}
+
+.btn-adivinhar { background-color: #17a2b8; }
+.btn-reiniciar { background-color: #6c757d; }
+
+.status { display: flex; gap: 2rem; font-size: 1.2rem; }
+
+.ranking {
+  margin-top: 2rem;
+  background-color: rgba(255,255,255,0.2);
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 400px;
+}
